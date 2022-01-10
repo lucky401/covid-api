@@ -1,0 +1,13 @@
+
+# Created by https://www.gitignore.io/api/node
+# Edit at https://www.gitignore.io/?templates=node
+
+# dotenv environment variables file
+.env
+.env.*
+
+# End of https://www.gitignore.io/api/node
+
+.DS_Store
+1A3F919CD5B7725108B03C349630A1C82B03_4A84987F2428442A9EC84563BB2BC063
+models.json

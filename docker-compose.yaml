@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  db:
+    image: mongo:latest
+    restart: unless-stopped
+    volumes:
+      - db-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${DB_DATABASE}
+    ports:
+      - 27017:27017
+    networks:
+      - backend
+
+  mongo-express:
+    image: mongo-express:latest
+    restart: unless-stopped
+    environment:
+      ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
+      ME_CONFIG_MONGODB_SERVER: db
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: secret
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_USER}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_PASSWORD}
+    ports:
+      - 8081:8081
+    depends_on:
+      - db
+    networks:
+      - web
+      - backend
+
+  webapi:
+    build:
+      context: ./src
+      dockerfile: Dockerfile.dev
+    restart: unless-stopped
+    environment:
+      PORT: ${PORT}
+
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      AUTH_SOURCE: ${AUTH_SOURCE}
+      CONNECTION_MODE: ${CONNECTION_MODE}
+    volumes:
+      - /home/node/app/node_modules
+      - ./src:/home/node/app
+    ports:
+      - ${PORT}:${PORT}
+    networks:
+      - web
+      - backend
+
+
+volumes:
+  db-data:
+
+networks:
+  web:
+  backend:
