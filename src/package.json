@@ -30,6 +30,7 @@
     "mongoose": "^6.1.5",
     "morgan": "^1.10.0",
     "node-cron": "^3.0.0",
+    "node-schedule": "^2.1.0",
     "pkginfo": "^0.4.1",
     "rotating-file-stream": "^3.0.2"
   }
