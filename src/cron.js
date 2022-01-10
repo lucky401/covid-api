@@ -96,10 +96,10 @@ const generateDailySummary = async (data) => {
     const payload = {
       date: date,
       formatted_date: toJSONLocal(date),
-      positive: item.jumlah_positif_kum.value,
-      recovered: item.jumlah_sembuh_kum.value,
-      deaths: item.jumlah_meninggal_kum.value,
-      active: item.jumlah_dirawat_kum.value,
+      positive: item.jumlah_positif.value,
+      recovered: item.jumlah_sembuh.value,
+      deaths: item.jumlah_meninggal.value,
+      active: item.jumlah_dirawat.value,
     };
 
     console.dir(payload);
