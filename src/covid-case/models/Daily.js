@@ -34,9 +34,10 @@ const Province = mongoose.model(
       timestamps: false,
       toJSON: {
         transform(doc, ret) {
-          ret.id = ret._id;
+          ret.date = ret.formatted_date;
           delete ret._id;
           delete ret.__v;
+          delete ret.formatted_date;
         },
       },
     },

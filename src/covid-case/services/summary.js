@@ -4,7 +4,7 @@ module.exports = class SummaryService {
   }
 
   async show() {
-    const summary = await this.Summary.findOne().sort({ updated_at: -1 }).exec();
+    const summary = await this.Summary.findOne();
     return summary;
   }
 

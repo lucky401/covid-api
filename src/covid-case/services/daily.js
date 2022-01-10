@@ -3,8 +3,8 @@ module.exports = class DailyService {
     this.Daily = Daily;
   }
 
-  async list() {
-    const dailyCollections = await this.Daily.find();
+  async list(params) {
+    const dailyCollections = await this.Daily.find({ ...params });
     return dailyCollections;
   }
 

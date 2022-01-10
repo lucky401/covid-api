@@ -2,12 +2,7 @@ const { Router } = require('express');
 
 const routes = Router();
 
-routes.get('/', (req, res) => {
-  res.status(200).json({
-    error: false,
-    message: 'Hello World!',
-  });
-});
+routes.use('/', require('./covid-case/api'));
 
 module.exports = (app) => {
   app.use('/', routes);
